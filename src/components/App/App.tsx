@@ -1,8 +1,9 @@
+import Navbar from "../Navbar";
 
 const App = () => {
   return (
-    <div className="">
-      <div></div>
+    <div className="min-h-screen flex bg-blue-900">
+      <Navbar />
     </div>
   );
 }
