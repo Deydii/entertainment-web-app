@@ -6,4 +6,16 @@
   html {
     font-family: 'Outfit', sans-serif;
   }
+
+  ::-webkit-scrollbar-track {
+   @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-1.5 w-2.5 bg-blue-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-blue-200 ;
+  }
 }
