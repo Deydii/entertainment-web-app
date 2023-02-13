@@ -1,4 +1,5 @@
-import TrendingCard from "./Card";
+import TrendingCard from "./Trending";
+import Card from '../Card';
 
 const Home = () => {
   return (
@@ -6,6 +7,10 @@ const Home = () => {
       <h3 className="text-2xl">Trending</h3>
       <div className="mt-8 flex overflow-x-auto space-x-8">
         <TrendingCard />
+      </div>
+      <h3 className="mt-8 text-2xl">Recommended for you</h3>
+      <div className="mt-8 mb-10 grid grid-cols-4 gap-x-1 gap-y-10">
+        <Card />
       </div>
     </div>
   )
