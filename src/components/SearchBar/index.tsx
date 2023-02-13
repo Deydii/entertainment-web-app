@@ -4,9 +4,9 @@ const SearchBar = () => {
   return(
     <div className='mt-[6.5vh] flex'>
       <img className="self-start" src={searchIcon} alt="search icon" />
-      <form className="ml-4 w-full">
+      <form className="ml-4 w-3/4	md:w-full">
         <input
-          className="w-full h-full pb-4 border-0 bg-transparent text-xl text-white placeholder:text-xl placeholder:opacity-60 cursor-pointer caret-red focus:outline-0 focus:border-b focus:border-white/50"
+          className="w-full h-full pb-4 border-0 bg-transparent placeholder:text-base text-xl text-white md:placeholder:text-xl placeholder:opacity-60 cursor-pointer caret-red focus:outline-0 focus:border-b focus:border-white/50"
           type="text"
           value=""
           placeholder="Search for movie or TV series"
