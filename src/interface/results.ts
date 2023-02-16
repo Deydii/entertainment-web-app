@@ -14,6 +14,6 @@ export interface Results {
   year: number,
   category: string,
   rating: string,
-  isBookMarked?: boolean,
+  isBookmarked: boolean,
   isTrending: boolean
 }
