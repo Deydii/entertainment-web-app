@@ -26,10 +26,10 @@ const TrendingCard = ({
     <>
       <div className="group relative flex-shrink-0 snap-start hover:cursor-pointer">
        <div className="hidden md:block md:w-[470px] md:h-[230px]">
-         <img className="rounded-lg h-full w-full group-hover:opacity-75" src="" alt={title} />
+         <img className="rounded-lg h-full w-full group-hover:opacity-75" src={thumbnail?.large} alt={title} />
        </div>
        <div className="block w-[240px] h-[140px] md:hidden">
-         <img className="rounded-lg h-full w-full group-hover:opacity-75" src="" alt={title} />
+         <img className="rounded-lg h-full w-full group-hover:opacity-75" src={thumbnail?.small} alt={title} />
        </div>
         <div className="flex justify-center items-center absolute z-2 top-3 right-4 rounded-full w-7 h-7 bg-blue-200">
           <img src={bookmarkIcon} alt="bookmark icon" />

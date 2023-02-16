@@ -2,16 +2,19 @@ import { useContext } from 'react';
 import { DataContext } from '../../context/dataContext';
 import TrendingCard from "./Trending";
 import Card from '../Card';
+import { Results } from '../../interface/results';
 
 const Home = () => {
 
   const { data } = useContext(DataContext);
 
+  const trending:Results[] = data.filter(trending => trending.isTrending)
+
   return (
     <div className="mt-4 text-white">
       <h3 className="text-[20px] md:text-2xl">Trending</h3>
       <div className="mt-8 flex overflow-x-auto space-x-4 md:space-x-8">
-       {data.map(({ title, thumbnail, year, category, rating }) => {
+       {trending.map(({ title, thumbnail, year, category, rating }) => {
         return (
           <TrendingCard 
             key={title}
