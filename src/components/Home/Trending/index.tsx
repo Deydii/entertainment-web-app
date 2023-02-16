@@ -1,7 +1,7 @@
-import bookmarkIcon from '../../../assets/icons/icon-bookmark-empty.svg';
-import movieCategory from '../../../assets/icons/icon-category-movie.svg';
-import serieCategory from '../../../assets/icons/icon-category-tv.svg'
-import playIcon from '../../../assets/icons/icon-play.svg';
+import bookmarkIcon from '../../../images/icons/icon-bookmark-empty.svg';
+import movieCategory from '../../../images/icons/icon-category-movie.svg';
+import serieCategory from '../../../images/icons/icon-category-tv.svg'
+import playIcon from '../../../images/icons/icon-play.svg';
 
 interface TrendingCardData {
   title: string,

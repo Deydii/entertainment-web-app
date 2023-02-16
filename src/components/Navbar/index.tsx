@@ -1,6 +1,6 @@
-import logo from '../../assets/logo/logo.svg';
+import logo from '../../images/logo/logo.svg';
 import LinksMenu from './Links';
-import avatar from '../../assets/avatar/image-avatar.png';
+import avatar from '../../images/avatar/image-avatar.png';
 
 const Navbar = () => {
   return(

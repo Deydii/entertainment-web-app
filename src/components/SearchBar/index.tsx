@@ -1,4 +1,4 @@
-import searchIcon from '../../assets/icons/icon-search.svg';
+import searchIcon from '../../images/icons/icon-search.svg';
 
 const SearchBar = () => {
   return(
