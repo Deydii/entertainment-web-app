@@ -1,18 +1,35 @@
-import cardImage from '../../../assets/thumbnails/beyond-earth/trending/large.jpg';
-import mobileCardImage from '../../../assets/thumbnails/beyond-earth/trending/small.jpg';
 import bookmarkIcon from '../../../assets/icons/icon-bookmark-empty.svg';
 import movieCategory from '../../../assets/icons/icon-category-movie.svg';
+import serieCategory from '../../../assets/icons/icon-category-tv.svg'
 import playIcon from '../../../assets/icons/icon-play.svg';
 
-const TrendingCard = () => {
+interface TrendingCardData {
+  title: string,
+  thumbnail?: {
+    small: string,
+    large: string
+  },
+  year: number,
+  category: string,
+  rating: string
+}
+
+const TrendingCard = ({
+  title,
+  thumbnail,
+  year,
+  category,
+  rating
+} : TrendingCardData ) => {
+
   return (
     <>
       <div className="group relative flex-shrink-0 snap-start hover:cursor-pointer">
        <div className="hidden md:block md:w-[470px] md:h-[230px]">
-         <img className="rounded-lg h-full w-full group-hover:opacity-75" src={cardImage} alt="Beyond Earth movie" />
+         <img className="rounded-lg h-full w-full group-hover:opacity-75" src="" alt={title} />
        </div>
        <div className="block w-[240px] h-[140px] md:hidden">
-         <img className="rounded-lg h-full w-full group-hover:opacity-75" src={mobileCardImage} alt="Beyond Earth movie" />
+         <img className="rounded-lg h-full w-full group-hover:opacity-75" src="" alt={title} />
        </div>
         <div className="flex justify-center items-center absolute z-2 top-3 right-4 rounded-full w-7 h-7 bg-blue-200">
           <img src={bookmarkIcon} alt="bookmark icon" />
@@ -23,16 +40,16 @@ const TrendingCard = () => {
         </button>
         <div className="absolute z-2 left-5 bottom-2 md:bottom-6">
           <ul className="flex space-x-1 md:space-x-3 list-none text-sm text-white/75">
-            <li>2019</li>
+            <li>{year}</li>
             <li className="flex items-center before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
-              <img className="mr-2"src={movieCategory} alt="movie category icon" />
-              Movie
+              <img className="mr-2"src={category === "film" ? movieCategory : serieCategory} alt={`${category} category icon`} />
+              {category}
             </li>
             <li className="flex items-center before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
-              PG
+              {rating}
             </li>
           </ul>
-          <p className="mt-1 text-sm md:text-xl text-white ">Beyond Earth</p>
+          <p className="mt-1 text-sm md:text-xl text-white ">{title}</p>
         </div>
       </div>
      </>
