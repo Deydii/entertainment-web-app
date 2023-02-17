@@ -23,18 +23,19 @@ const Card = ({
   rating,
   isBookmarked
 }: DataCard ) => {
+
   return (
     <>
-    <div className="relative w-[164px] md:w-[220px] lg:w-72 h-auto">
+    <div className="relative w-auto min-[375px]:w-[164px] min-[425px]:w-auto md:w-[220px] lg:w-auto">
       <div className="relative group hover:cursor-pointer">
-        <div className="hidden lg:block">
-          <img className="rounded-lg w-full h-[174px] group-hover:opacity-75" src={thumbnail.large} alt={title} />
+         <div className="hidden lg:block">
+          <img className="rounded-lg h-auto group-hover:opacity-75" src={thumbnail.large} alt={title} />
         </div>
         <div className="hidden md:block lg:hidden">
-          <img className="rounded-lg w-full h-[140px] group-hover:opacity-75" src={thumbnail.medium} alt={title} />
+          <img className="rounded-lg h-auto group-hover:opacity-75" src={thumbnail.medium} alt={title} />
         </div>
         <div className="block md:hidden">
-          <img className="rounded-lg w-full h-[110px] group-hover:opacity-75" src={thumbnail.small} alt={title} />
+          <img className="rounded-lg h-auto group-hover:opacity-75" src={thumbnail.small} alt={title} />
         </div>
         <button className="absolute opacity-0 group-hover:opacity-100 flex justify-center items-center space-x-4 z-2 w-20 h-6 md:w-24 md:h-8 lg:w-28 lg:h-12 rounded-full bg-white/[0.40] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2" type="button">
           <img className="w-4 h-4 lg:w-auto lg:h-auto" src={playIcon} alt="play icon" />
@@ -54,7 +55,7 @@ const Card = ({
             <path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" strokeWidth="1.5" fill="none"/>
           </svg>
         </div>
-      )
+       )
       }
       <div className="mt-2">
         <ul className="flex space-x-2 lg:space-x-3 list-none text-xs text-white/75">

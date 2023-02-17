@@ -5,6 +5,7 @@
 @layer base {
   html {
     font-family: 'Outfit', sans-serif;
+    @apply bg-blue-900
   }
 
   ::-webkit-scrollbar-track {
