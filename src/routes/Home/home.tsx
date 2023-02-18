@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DataContext } from '../../context/dataContext';
 import TrendingCard from "./Trending";
-import Card from '../Card';
+import Card from '../../components/Card';
 import { Results } from '../../interface/results';
 
 const Home = () => {
@@ -37,13 +37,13 @@ const Home = () => {
             {data.map(({ title, thumbnail, year, category, rating, isBookmarked }) => {
               return (
                 <Card 
-                key={title}
-                title={title}
-                thumbnail={thumbnail.regular}
-                year={year}
-                category={category}
-                rating={rating}
-                isBookmarked={isBookmarked}
+                  key={title}
+                  title={title}
+                  thumbnail={thumbnail.regular}
+                  year={year}
+                  category={category}
+                  rating={rating}
+                  isBookmarked={isBookmarked}
                 />
               )
             })}
