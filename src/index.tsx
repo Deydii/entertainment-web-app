@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import { DataContextProvider } from './context/dataContext';
 import Home from './routes/Home/home';
+import Movies from './routes/movies';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "movies",
+        element: <Movies />
       }
     ]
   }
