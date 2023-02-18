@@ -5,8 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import { DataContextProvider } from './context/dataContext';
 import Home from './routes/Home/home';
-import Movies from './routes/movies';
-import Series from './routes/series';
+import Cards from './routes/cards';
+import Bookmarked from './routes/bookmarked';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -23,11 +23,15 @@ const router = createBrowserRouter([
       },
       {
         path: "movies",
-        element: <Movies />
+        element: <Cards name="movie" />
       },
       {
         path: "tv-series",
-        element: <Series />
+        element: <Cards name="tv series" />
+      },
+      {
+        path: "bookmarked",
+        element: <Bookmarked />
       }
     ]
   }
