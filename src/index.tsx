@@ -8,6 +8,7 @@ import Home from './routes/Home/home';
 import Cards from './routes/cards';
 import Bookmarked from './routes/bookmarked';
 import Login from './routes/login';
+import SignUp from './routes/signup';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />
+  },
+  {
+    path: "signup",
+    element: <SignUp />
   }
 ])
 
