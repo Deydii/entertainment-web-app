@@ -33,15 +33,15 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   };
 
   const handleBookmarkedShows = (value: string):void => {
-    const bookmarked = data.map(show => {
-      if (show.title === value) {
-        const bookmarkedArray = {
-          ...show,
-          isBookmarked: !show.isBookmarked
+    const bookmarked = data.map(shows => {
+      if (shows.title === value) {
+        const bookmarkedValue = {
+          ...shows,
+          isBookmarked: !shows.isBookmarked
         }
-        return bookmarkedArray
+        return bookmarkedValue
       }
-      return show
+      return shows
     })
     setData(bookmarked)
   };
