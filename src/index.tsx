@@ -7,6 +7,7 @@ import { DataContextProvider } from './context/dataContext';
 import Home from './routes/Home/home';
 import Cards from './routes/cards';
 import Bookmarked from './routes/bookmarked';
+import Login from './routes/login';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         element: <Bookmarked />
       }
     ]
+  },
+  {
+    path: "login",
+    element: <Login />
   }
 ])
 
