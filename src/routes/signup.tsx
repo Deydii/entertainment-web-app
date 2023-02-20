@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../images/logo/logo.svg';
 
 const SignUp = () => {
@@ -24,7 +25,7 @@ const SignUp = () => {
             placeholder="Repeat password"
           />
           <button className=" w-full bg-red h-12 rounded-md hover:bg-white hover:text-blue-900">Create an account</button>
-          <p className="text-center">Already have an account? <span className="text-red">Login</span></p>
+          <p className="text-center">Already have an account? <Link to="/login"><span className="text-red">Login</span></Link></p>
           </div>
         </form>
       </div>

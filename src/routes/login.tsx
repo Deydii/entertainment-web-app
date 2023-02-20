@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../images/logo/logo.svg';
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
             placeholder="Password"
           />
           <button className=" w-full bg-red h-12 rounded-md hover:bg-white hover:text-blue-900">Login to your account</button>
-          <p className="text-center">Don't have an account? <span className="text-red">Sign Up</span></p>
+          <p className="text-center">Don't have an account?  <Link to="/signup"><span className="text-red">Sign Up</span></Link></p>
           </div>
         </form>
       </div>
