@@ -1,17 +1,19 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, User as UserApp } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, User as UserApp, signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebase-config';
 
 interface User {
   signUp: (email: string, password: string) => void,
   signIn: (email: string, password: string) => void,
-  user: UserApp | null
+  user: UserApp | null,
+  signOutApp: () => void
 }
 
 const defaultState = {
   signUp: () => {},
   signIn: () => {},
-  user: null
+  user: null,
+  signOutApp: () => {},
 }
 
 export const UserContext = createContext<User>(defaultState);
@@ -24,6 +26,8 @@ export const UserContextProvider = ({ children }: {children: ReactNode}) => {
   const signUp = (email: string, password: string) => createUserWithEmailAndPassword(auth, email, password);
 
   const signIn = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
+
+  const signOutApp = () => signOut(auth);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -39,7 +43,8 @@ export const UserContextProvider = ({ children }: {children: ReactNode}) => {
     <UserContext.Provider value={{ 
       signUp,
       signIn,
-      user
+      user,
+      signOutApp
     }}>
       {!loadingData && children}
     </UserContext.Provider>
