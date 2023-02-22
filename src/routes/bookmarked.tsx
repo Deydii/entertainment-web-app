@@ -1,11 +1,19 @@
 import { useContext } from 'react';
 import { DataContext } from '../context/dataContext';
+import { UserContext } from '../context/userContext';
 import Card from '../components/Card';
+import { Navigate } from 'react-router-dom';
 import { Results } from '../interface/results';
 
 const Bookmarked = () => {
 
   const { data, show } = useContext(DataContext);
+
+  const {user} = useContext(UserContext);
+
+  if(!user) {
+    return <Navigate to="/login" />
+  };
 
   const results:Results[] = data.filter(results => results.isBookmarked);
   

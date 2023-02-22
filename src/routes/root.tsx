@@ -1,8 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import { useContext } from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
+import { UserContext } from '../context/userContext';
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
 
 const Root = () => {
+
+  const {user} = useContext(UserContext);
+
+  if(!user) {
+    return <Navigate to="/login" />
+  }
+
   return (
     <div className="min-h-screen w-full overflow-hidden flex flex-col lg:flex-row">
     <header className="w-full lg:w-32 lg:pl-8">
