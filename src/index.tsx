@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
+import { UserContextProvider } from './context/userContext';
 import { DataContextProvider } from './context/dataContext';
 import Home from './routes/Home/home';
 import Cards from './routes/cards';
@@ -49,9 +50,11 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <DataContextProvider>
-      <RouterProvider router={router} />
-    </DataContextProvider>
+    <UserContextProvider>
+      <DataContextProvider>
+        <RouterProvider router={router} />
+      </DataContextProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );
 
