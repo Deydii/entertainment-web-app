@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../context/userContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FirebaseError } from '@firebase/util'
 import logo from '../images/logo/logo.svg';
-
 
 interface SignUpForm {
   password: string,
@@ -12,7 +12,8 @@ interface SignUpForm {
 
 const SignUp = () => {
 
-  const { signUp, loading, errorSignUp  } = useContext(UserContext);
+  const { signUp } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -21,6 +22,8 @@ const SignUp = () => {
   });
 
   const [errors, setErrors] = useState<SignUpForm>();
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleOnChange = (name:string, value: string) => {
     setFormValues({
@@ -31,6 +34,7 @@ const SignUp = () => {
 
   const handleOnSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setLoading(true);
     let errors:SignUpForm = {
       password: "",
       repeatedPassword: "",
@@ -51,8 +55,19 @@ const SignUp = () => {
 
     setErrors({...errors})
 
-    signUp(formValues.email, formValues.password)
-
+    try {
+      await signUp(formValues.email, formValues.password);
+      navigate("/")
+    } catch(error: any) {
+      setLoading(false);
+      if (error instanceof FirebaseError) {
+        const codes: string[] = ["auth/invalid-email", "auth/email-already-in-use", "auth/missing-email"]
+        const errorCode: string = codes.find(code => code === error.code) || ""
+        const message:string = errorCode.slice(5).replaceAll('-', ' ');
+        const errorMessage = message.charAt(0).toUpperCase() + message.slice(1);
+        setErrorMessage(errorMessage);
+      }
+    }
   }
 
 
@@ -68,13 +83,13 @@ const SignUp = () => {
           <div className="space-y-8">
           <div className="relative">
             <input 
-              className={!loading && errorSignUp ? "w-full pb-5 bg-transparent placeholder:text-sm placeholder:opacity-50 placeholder:indent-3 outline-1 border-b border-b-red focus:outline-0 focus:border-b-white caret-red cursor-pointer" : "w-full pb-5 bg-transparent placeholder:text-sm placeholder:opacity-50 placeholder:indent-3 outline-1 border-b border-b-white/50 focus:outline-0 focus:border-b-white caret-red cursor-pointer"} 
+              className={!loading && errorMessage ? "w-full pb-5 bg-transparent placeholder:text-sm placeholder:opacity-50 placeholder:indent-3 outline-1 border-b border-b-red focus:outline-0 focus:border-b-white caret-red cursor-pointer" : "w-full pb-5 bg-transparent placeholder:text-sm placeholder:opacity-50 placeholder:indent-3 outline-1 border-b border-b-white/50 focus:outline-0 focus:border-b-white caret-red cursor-pointer"} 
               type="text"
               placeholder="Email address"
               value={formValues.email}
               onChange={(e) => handleOnChange("email", e.target.value)}
             />
-           {!loading && <p className="absolute top-0 right-0 text-xs text-red">{errorSignUp}</p>}
+           {!loading && <p className="absolute top-0 right-0 text-xs text-red">{errorMessage}</p>}
           </div>
           <div className="relative">
             <input 
