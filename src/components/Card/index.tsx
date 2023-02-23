@@ -35,7 +35,7 @@ const Card = ({
   return (
     <>
     <div className="relative w-auto min-[375px]:w-[164px] min-[425px]:w-auto md:w-[220px] lg:w-auto">
-      <div className="relative group hover:cursor-pointer">
+      <div className="relative group hover:cursor-pointer hover:scale-[1.05] transition duration-300 ease-in-out">
          <div className="hidden lg:block">
           <img className="rounded-lg h-auto group-hover:opacity-75" src={thumbnail.large} alt={title} />
         </div>

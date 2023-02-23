@@ -24,7 +24,7 @@ const TrendingCard = ({
 
   return (
     <>
-      <div className="group relative flex-shrink-0 snap-start hover:cursor-pointer">
+      <div className="group relative flex-shrink-0 snap-start hover:cursor-pointer hover:scale-[1.05] transition duration-300 ease-in-out">
        <div className="hidden md:block md:w-[470px] md:h-[230px]">
          <img className="rounded-lg h-full w-full group-hover:opacity-75" src={thumbnail?.large} alt={title} />
        </div>

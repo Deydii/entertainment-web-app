@@ -17,7 +17,7 @@ const Home = () => {
       {!show && (
         <>
           <h3 className="text-[20px] md:text-2xl">Trending</h3>
-          <div className="mt-8 flex overflow-x-scroll space-x-4 md:space-x-8">
+          <div className="mt-8 pr-8 flex overflow-x-scroll overflow-y-hidden space-x-4 md:space-x-8">
             {trending.map(({ title, thumbnail, year, category, rating }) => {
               return (
                 <TrendingCard 
