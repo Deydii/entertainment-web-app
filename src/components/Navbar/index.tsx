@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const handleOnClick = async () => {
    try {
-    await signOutApp();
+    signOutApp();
     navigate("/login")
    } catch(error) {
     return error

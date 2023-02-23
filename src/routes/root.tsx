@@ -8,7 +8,7 @@ const Root = () => {
 
   const {user} = useContext(UserContext);
 
-  if(!user) {
+  if (!user) {
     return <Navigate to="/login" />
   }
 
