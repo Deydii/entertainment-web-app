@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { DataContext } from '../../context/dataContext';
 import movieCategory from '../../images/icons/icon-category-movie.svg';
 import serieCategory from '../../images/icons/icon-category-tv.svg'
-import playIcon from '../../images/icons/icon-play.svg';
+// import playIcon from '../../images/icons/icon-play.svg';
 
 interface DataCard {
 title: string,
@@ -45,10 +45,10 @@ const Card = ({
         <div className="block md:hidden">
           <img className="rounded-lg h-auto group-hover:opacity-75" src={thumbnail.small} alt={title} />
         </div>
-        <button className="absolute opacity-0 group-hover:opacity-100 flex justify-center items-center space-x-4 z-2 w-20 h-6 md:w-24 md:h-8 lg:w-28 lg:h-12 rounded-full bg-white/[0.40] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2" type="button">
+        {/* <button className="absolute opacity-0 group-hover:opacity-100 flex justify-center items-center space-x-4 z-2 w-20 h-6 md:w-24 md:h-8 lg:w-28 lg:h-12 rounded-full bg-white/[0.40] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2" type="button">
           <img className="w-4 h-4 lg:w-auto lg:h-auto" src={playIcon} alt="play icon" />
           <p className="text-white text-base lg:text-lg">Play</p>
-        </button>
+        </button> */}
       </div>
       {isBookmarked ? (
         <div onClick={() => handleOnClick(title)} className="flex justify-center items-center absolute z-2 top-3 right-4 rounded-full w-7 h-7 bg-blue-200 hover:cursor-pointer" >
