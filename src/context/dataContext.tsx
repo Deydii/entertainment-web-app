@@ -23,10 +23,16 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   const [data, setData] = useState<Results[]>([]);
   const [show, setShow] = useState("");
 
-  useEffect(() => setData(dataApp), []);
+  useEffect(() => {
+   const shows:string = localStorage.getItem('shows') || "[]";
+   const dataShows: Results[] = JSON.parse(shows);
 
-  useEffect(() => localStorage.setItem('shows', JSON.stringify(data)), [data]);
-
+    if (shows === "[]") {
+      setData(dataApp)
+    } else {
+      setData(dataShows);
+    }
+  }, [])
 
   const getShows = (value: string):void => {
     setShow(value);
@@ -43,7 +49,8 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       }
       return shows
     })
-    setData(bookmarked)
+    setData(bookmarked);
+    localStorage.setItem('shows', JSON.stringify(bookmarked));
   };
 
   return (
