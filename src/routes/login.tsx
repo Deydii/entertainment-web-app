@@ -35,7 +35,7 @@ const handleOnChange = (name:string, value: string) => {
     }
 
     try {
-      signIn(formValues.email, formValues.password);
+     await signIn(formValues.email, formValues.password);
       navigate("/")
     } catch(error: any) {
       setLoading(false);

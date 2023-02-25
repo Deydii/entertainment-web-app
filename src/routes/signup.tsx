@@ -56,7 +56,7 @@ const SignUp = () => {
     setErrors({...errors})
 
     try {
-      signUp(formValues.email, formValues.password);
+      await signUp(formValues.email, formValues.password);
       navigate("/")
     } catch(error: any) {
       setLoading(false);
