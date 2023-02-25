@@ -3,15 +3,15 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { UserContextProvider } from '../../context/userContext';
 import SignUp from "../../routes/signup";
-import SearchBar from '../../components/SearchBar';
 import Login from "../../routes/login";
+import Home from "../../routes/Home/home";
 
 describe('Login component', () => {
 
   const routes = [
     {
       path: "/",
-      element: <SearchBar />
+      element: <Home />
     },
     {
       path: "login",
@@ -104,7 +104,7 @@ describe('Login component', () => {
   const button = await screen.findByRole('button');
   await user.click(button);
 
-  const searchBar = await screen.findByPlaceholderText(/search for movie or tv series/i);
-  expect(searchBar).toBeInTheDocument();
+  const trendingTitle = await screen.findByText(/trending/i);
+  expect(trendingTitle).toBeInTheDocument();
 });
 });
