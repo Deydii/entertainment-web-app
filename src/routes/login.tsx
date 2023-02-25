@@ -46,9 +46,13 @@ const handleOnChange = (name:string, value: string) => {
         const errorMessage = message.charAt(0).toUpperCase() + message.slice(1);
         setErrorMessage(errorMessage);
 
-        if (error.code === "auth/wrong-password") {
-          setErrors("Wrong password")
-        }
+      if (error.code === "auth/user-not-found") {
+        setErrorMessage("This email is not found");
+      }
+
+      if (error.code === "auth/wrong-password") {
+        setErrors("Wrong password")
+      }
       }
     }
   }

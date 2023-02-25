@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { UserContextProvider } from '../../context/userContext';
 import SignUp from "../../routes/signup";
+import Home from "../../routes/Home/home";
 import Root from "../../routes/root";
 import Login from "../../routes/login";
 
@@ -10,8 +11,13 @@ describe('Sign up component', () => {
 
   const routes = [
     {
-      path: "/",
-      element: <Root />
+      element: <Root />,
+      children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      ]
     },
     {
       path: "login",
@@ -28,30 +34,6 @@ describe('Sign up component', () => {
       <RouterProvider router={createMemoryRouter(routes, { initialEntries: ['/signup']})}/>
     </UserContextProvider>
 
-
-  test('User can sign in', async () => {
-    const user = userEvent.setup();
-    render(component);
-
-    const email = await screen.findByRole('textbox');
-    await user.type(email, "test@test.com");
-    expect(email).toHaveValue("test@test.com");
-    
-    const passwordInputs =  await screen.findAllByPlaceholderText(/password/i);
-    const password = passwordInputs[0];
-    await user.type(password, "testtest");
-    expect(password).toHaveValue("testtest");
-
-    const repeatedPassword = passwordInputs[1];
-    await user.type(repeatedPassword, "testtest");
-    expect(repeatedPassword).toHaveValue("testtest");
-
-    const button = await screen.findByRole('button');
-    await user.click(button);
-
-    const loginTitle = await screen.findByRole("heading");
-    expect(loginTitle).toBeInTheDocument();
-  });
 
   test('Error messages if inputs are empty', async () => {
     const user = userEvent.setup();
@@ -72,7 +54,7 @@ describe('Sign up component', () => {
     render(component);
 
     const email = await screen.findByRole('textbox');
-    await user.type(email, "test@test.com");
+    await user.type(email, "test@test.net");
 
     const button = await screen.findByRole('button');
     await user.click(button);
@@ -100,14 +82,27 @@ describe('Sign up component', () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-   test('User can login if he already has an account', async () => {
+  test('User can sign up', async () => {
     const user = userEvent.setup();
-    render(component)
+    render(component);
 
-    const link = await screen.findByRole('link');
-    await user.click(link);
+    const email = await screen.findByRole('textbox');
+    await user.type(email, "mail@test.com");
+    expect(email).toHaveValue("mail@test.com");
+    
+    const passwordInputs =  await screen.findAllByPlaceholderText(/password/i);
+    const password = passwordInputs[0];
+    await user.type(password, "testtest");
+    expect(password).toHaveValue("testtest");
 
-    const loginTitle = await screen.findByRole("heading");
-    expect(loginTitle).toBeInTheDocument();
+    const repeatedPassword = passwordInputs[1];
+    await user.type(repeatedPassword, "testtest");
+    expect(repeatedPassword).toHaveValue("testtest");
+
+    const button = await screen.findByRole('button');
+    await user.click(button);
+
+    const login = await screen.findByRole('button', {name: /login to your account/i});
+    expect(login).toBeInTheDocument();
   });
 });
