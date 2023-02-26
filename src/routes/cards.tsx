@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Transition } from '@headlessui/react';
 import { DataContext } from '../context/dataContext';
 import Card from '../components/Card';
@@ -10,23 +10,20 @@ interface NameCategory  {
 
 const Cards = ({ name }: NameCategory) => {
 
-  const [isShowing, setIsShowing] = useState(false);
-
   const { data, show } = useContext(DataContext);
 
   const results:Results[] = data.filter(results => results.category.toLowerCase() === name);
 
   const shows:Results[] = data.filter(shows => shows.title.toLowerCase().includes(show.toLowerCase()) && shows.category.toLowerCase() === name);
 
-  useEffect(() => setIsShowing(true), []);
-
   return (
    <>
    {!show && (
     <>
     <h3 className="mt-4 text-white text-[20px] md:text-2xl">{name === "movie" ? "Movies" : "TV Series"}</h3>
-    <Transition 
-      show={isShowing} 
+    <Transition
+      appear={true}
+      show={true} 
       enter="transition-opacity duration-700"
       enterFrom="opacity-0"
       enterTo='opacity-100'

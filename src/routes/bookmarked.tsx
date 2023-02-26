@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Transition } from '@headlessui/react';
 import { DataContext } from '../context/dataContext';
 import { UserContext } from '../context/userContext';
@@ -8,13 +8,9 @@ import { Results } from '../interface/results';
 
 const Bookmarked = () => {
 
-  const [isShowing, setIsShowing] = useState(false);
-
   const { data, show } = useContext(DataContext);
 
   const {user} = useContext(UserContext);
-
-  useEffect(() => setIsShowing(true), [])
 
   if (!user) {
     return <Navigate to="/login" />
@@ -32,9 +28,9 @@ const Bookmarked = () => {
    <>
    {!show && (
     <>
+    <Transition appear={true} show={true}>
     <h3 className="mt-4 text-white text-[20px] md:text-2xl">Bookmarked movies</h3>
-    <Transition 
-      show={isShowing} 
+    <Transition.Child
       enter="transition-opacity duration-700"
       enterFrom="opacity-0"
       enterTo='opacity-100'
@@ -55,10 +51,9 @@ const Bookmarked = () => {
         })
       }
     </div>
-   </Transition>
+   </Transition.Child>
    <h3 className="mt-12 text-white text-[20px] md:text-2xl">Bookmarked TV Series</h3>
-   <Transition 
-      show={isShowing} 
+   <Transition.Child
       enter="transition-opacity duration-700"
       enterFrom="opacity-0"
       enterTo='opacity-100'
@@ -78,6 +73,7 @@ const Bookmarked = () => {
           )
         })}
       </div>
+      </Transition.Child>
     </Transition>
    </>
    )}

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Transition } from '@headlessui/react';
 import { DataContext } from '../../context/dataContext';
 import TrendingCard from "./Trending";
@@ -8,23 +8,20 @@ import { Results } from '../../interface/results';
 
 const Home = () => {
 
-  const [isShowing, setIsShowing] = useState(false)
-
   const { data, show } = useContext(DataContext);
 
   const trending:Results[] = data.filter(trending => trending.isTrending);
 
   const results:Results[] = data.filter(shows => shows.title.toLowerCase().includes(show.toLowerCase()));
 
-  useEffect(() => setIsShowing(true), [])
-
   return (
     <div className="mt-4 text-white">
       {!show && (
         <>
+        <Transition appear={true} show={true}>
           <h3 className="text-[20px] md:text-2xl">Trending</h3>
-          <Transition 
-            show={isShowing}
+          <Transition.Child
+            data-testid="transition"
             enter="transition-opacity duration-700"
             enterFrom="opacity-0"
             enterTo='opacity-100'
@@ -44,10 +41,10 @@ const Home = () => {
                 })
               }
             </div>
-           </Transition>
+          </Transition.Child>
           <h3 className="mt-8 text-[20px] md:text-2xl">Recommended for you</h3>
-          <Transition 
-            show={isShowing} 
+          <Transition.Child
+            data-testid="transition"
             enter="transition-opacity duration-700"
             enterFrom="opacity-0"
             enterTo='opacity-100'
@@ -67,6 +64,7 @@ const Home = () => {
                 )
               })}
             </div>
+           </Transition.Child>
           </Transition>
         </>
         )
