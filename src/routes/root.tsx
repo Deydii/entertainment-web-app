@@ -6,7 +6,7 @@ import SearchBar from '../components/SearchBar';
 
 const Root = () => {
 
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   if (!user) {
     return <Navigate to="/login" />
