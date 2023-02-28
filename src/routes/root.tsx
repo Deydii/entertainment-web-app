@@ -1,15 +1,16 @@
 import { useContext } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { UserContext } from '../context/userContext';
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
+import Login from './login';
 
 const Root = () => {
 
   const { user } = useContext(UserContext);
 
   if (!user) {
-    return <Navigate to="/login" />
+    return <Login />
   }
 
   return (

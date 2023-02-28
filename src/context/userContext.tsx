@@ -30,13 +30,10 @@ export const UserContextProvider = ({ children }: {children: ReactNode}) => {
   const signOutApp = () => signOut(auth);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if(user){
-        setUser(user);
-        setLoadingData(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
       setLoadingData(false);
-    })
+    });
 
     return unsubscribe;
   }, []);

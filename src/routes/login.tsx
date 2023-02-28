@@ -35,8 +35,8 @@ const handleOnChange = (name:string, value: string) => {
     }
 
     try {
-     await signIn(formValues.email, formValues.password);
-      navigate("/")
+      await signIn(formValues.email, formValues.password);
+      navigate("/");
     } catch(error: any) {
       setLoading(false);
       if (error instanceof FirebaseError) {
