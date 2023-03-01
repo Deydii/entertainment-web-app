@@ -55,6 +55,7 @@ Users should be able to:
 
 - React
 - TypeScript
+- React Router Dom
 - Firebase Authentication
 - Tailwind CSS
 
