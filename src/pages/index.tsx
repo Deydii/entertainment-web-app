@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import { Transition } from '@headlessui/react';
-import { DataContext } from '../../context/dataContext';
+import { DataContext } from '../context/dataContext';
 import TrendingCard from "./Trending";
-import Card from '../../components/Card';
-import { Results } from '../../interface/results';
-
+import Card from '../components/Card';
+import { Results } from '../interface/results';
 
 const Home = () => {
 
