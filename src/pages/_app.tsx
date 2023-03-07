@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { DataContextProvider } from '../context/dataContext';
 import '../styles/globals.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -13,7 +14,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-      <Component {...pageProps} />
+      <DataContextProvider>
+        <Component {...pageProps} />
+      </DataContextProvider>
     </>
   )
 }

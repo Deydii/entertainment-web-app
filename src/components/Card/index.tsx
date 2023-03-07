@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { DataContext } from '../../context/dataContext';
-import movieCategory from '../../images/icons/icon-category-movie.svg';
-import serieCategory from '../../images/icons/icon-category-tv.svg'
+import Image from 'next/image';
 // import playIcon from '../../images/icons/icon-play.svg';
 
 interface DataCard {
@@ -70,7 +69,13 @@ const Card = ({
         <ul className="flex space-x-2 lg:space-x-3 list-none text-xs text-white/75">
           <li>{year}</li>
           <li className="flex items-center before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
-            <img className="mr-2"src={category === "film" ? movieCategory : serieCategory} alt={`${category} category icon`} />
+            <Image 
+              className="mr-2"
+              src={category === "film" ? '/images/icons/icon-category-movie.svg' : '/images/icons/icon-category-tv.svg'} 
+              width={12}
+              height={12}
+              alt={`${category} category icon`} 
+            />
             {category}
           </li>
           <li className="flex items-center before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
