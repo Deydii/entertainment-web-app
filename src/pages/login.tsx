@@ -1,14 +1,13 @@
 import { useState, useContext } from 'react';
-import { UserContext } from '../context/userContext';
-import { Link, useNavigate } from 'react-router-dom';
-import { FirebaseError } from '@firebase/util'
-import logo from '../images/logo/logo.svg';
-
+// import { UserContext } from '../context/userContext';
+import { FirebaseError } from '@firebase/util';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Login = () => {
 
-const { signIn } = useContext(UserContext);
-const navigate = useNavigate();
+// const { signIn } = useContext(UserContext);
+// const navigate = useNavigate();
 
 const [formValues, setFormValues] = useState({
   email: "",
@@ -35,8 +34,8 @@ const handleOnChange = (name:string, value: string) => {
     }
 
     try {
-      await signIn(formValues.email, formValues.password);
-      navigate("/");
+      // await signIn(formValues.email, formValues.password);
+      // navigate("/");
     } catch(error: any) {
       setLoading(false);
       if (error instanceof FirebaseError) {
@@ -60,7 +59,13 @@ const handleOnChange = (name:string, value: string) => {
   return (
     <div className="h-screen w-full flex justify-center">
       <div className="mt-20">
-        <img className="mx-auto mb-20" src={logo} alt="logo" />
+        <Image 
+            className="mx-auto mb-20" 
+            src="/images/logo/logo.svg"
+            width={33} 
+            height={27}
+            alt="logo" 
+         />
         <form 
           className="w-72 min-[375px]:w-80 md:w-[400px] h-auto bg-blue-700 rounded-[20px] p-8 text-white text-sm font-light"
           onSubmit={handleOnSubmit}
@@ -93,7 +98,7 @@ const handleOnChange = (name:string, value: string) => {
           >
             Login to your account
           </button>
-          <p className="text-center">Don't have an account?  <Link to="/signup"><span className="text-red">Sign Up</span></Link></p>
+          <p className="text-center">Don't have an account?  <Link href="/signup"><span className="text-red">Sign Up</span></Link></p>
           </div>
         </form>
       </div>
