@@ -1,6 +1,7 @@
-import { useState, useContext } from 'react';
-// import { UserContext } from '../context/userContext';
-import { FirebaseError } from '@firebase/util'
+import { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../context/userContext';
+import { FirebaseError } from '@firebase/util';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -12,8 +13,8 @@ interface SignUpForm {
 
 const SignUp = () => {
 
-  // const { signUp } = useContext(UserContext);
-  // const navigate = useNavigate();
+  const { signUp } = useContext(UserContext);
+  const router =  useRouter();
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -56,8 +57,8 @@ const SignUp = () => {
     setErrors({...errors})
 
     try {
-      // await signUp(formValues.email, formValues.password);
-      // navigate("/")
+      await signUp(formValues.email, formValues.password);
+      router.push("/");
     } catch(error: any) {
       setLoading(false);
       if (error instanceof FirebaseError) {
@@ -68,8 +69,11 @@ const SignUp = () => {
         setErrorMessage(errorMessage);
       }
     }
-  }
+  };
 
+  useEffect(() => {
+    router.prefetch('/')
+  }, []);
 
   return (
     <div className="h-screen w-full flex justify-center">

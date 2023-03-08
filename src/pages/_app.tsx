@@ -4,6 +4,7 @@ import { Outfit } from 'next/font/google';
 import type { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
 import { DataContextProvider } from '../context/dataContext';
+import { UserContextProvider } from '../context/userContext';
 import '../styles/globals.css';
 
 const outfit = Outfit({
@@ -41,9 +42,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
           `}
         </style>
       </>
-      <DataContextProvider>
-        {getLayout(<Component {...pageProps} />)}
-      </DataContextProvider>
+      <UserContextProvider>
+        <DataContextProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </DataContextProvider>
+      </UserContextProvider>
     </>
   )
 }

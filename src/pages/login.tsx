@@ -1,13 +1,15 @@
-import { useState, useContext } from 'react';
-// import { UserContext } from '../context/userContext';
+import { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../context/userContext';
 import { FirebaseError } from '@firebase/util';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const Login = () => {
 
-// const { signIn } = useContext(UserContext);
-// const navigate = useNavigate();
+const { signIn } = useContext(UserContext);
+
+const router =  useRouter();
 
 const [formValues, setFormValues] = useState({
   email: "",
@@ -34,8 +36,8 @@ const handleOnChange = (name:string, value: string) => {
     }
 
     try {
-      // await signIn(formValues.email, formValues.password);
-      // navigate("/");
+      await signIn(formValues.email, formValues.password);
+      router.push("/");
     } catch(error: any) {
       setLoading(false);
       if (error instanceof FirebaseError) {
@@ -54,7 +56,11 @@ const handleOnChange = (name:string, value: string) => {
       }
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    router.prefetch('/')
+  }, []);
 
   return (
     <div className="h-screen w-full flex justify-center">

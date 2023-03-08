@@ -1,20 +1,26 @@
-import { useContext } from 'react';
-// import { UserContext } from '../../context/userContext';
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../../context/userContext';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import LinksMenu from './Links';
 
 const Navbar = () => {
 
-  // const { signOutApp } = useContext(UserContext);
+  const { signOutApp } = useContext(UserContext);
+  const router =  useRouter();
 
   const handleOnClick = async () => {
    try {
-    // signOutApp();
-    // navigate("/login")
+    signOutApp();
+    router.push("/login");
    } catch(error) {
     return error
    }
   };
+
+  useEffect(() => {
+    router.prefetch('/login')
+  }, []);
 
   return(
     <nav className="flex justify-center items-center relative h-20  bg-blue-700 md:w-[90%] md:rounded-[20px] md:mx-auto md:mt-4 lg:flex-col lg:justify-start lg:w-24 lg:h-[960px] lg:mt-8 lg:mx-0 lg:pt-11">
