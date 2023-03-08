@@ -1,5 +1,8 @@
 import { useContext, ReactElement } from 'react';
-import { Transition } from '@headlessui/react';
+import { GetServerSideProps } from 'next';
+import nookies from 'nookies';
+import { firebaseAdmin } from '../firebase/firebaseAdmin';
+//import { Transition } from '@headlessui/react';
 import { DataContext } from '../context/dataContext';
 import Card from '../components/Card';
 import Layout from '../components/Layout';
@@ -76,6 +79,26 @@ TvSeries.getLayout = function getLayout(page: ReactElement) {
       {page}
     </Layout>
   )
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    let cookies = nookies.get(context);
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid } = token;
+    return {
+      props: {
+        uid
+      },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
 };
 
 export default TvSeries;
