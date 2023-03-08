@@ -1,19 +1,16 @@
 import { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
-import { useNavigate } from 'react-router-dom';
-import logo from '../../images/logo/logo.svg';
+// import { UserContext } from '../../context/userContext';
+import Image from 'next/image';
 import LinksMenu from './Links';
-import avatar from '../../images/avatar/image-avatar.png';
 
 const Navbar = () => {
 
-  const { signOutApp } = useContext(UserContext);
-  const navigate = useNavigate();
+  // const { signOutApp } = useContext(UserContext);
 
   const handleOnClick = async () => {
    try {
-    signOutApp();
-    navigate("/login")
+    // signOutApp();
+    // navigate("/login")
    } catch(error) {
     return error
    }
@@ -21,10 +18,25 @@ const Navbar = () => {
 
   return(
     <nav className="flex justify-center items-center relative h-20  bg-blue-700 md:w-[90%] md:rounded-[20px] md:mx-auto md:mt-4 lg:flex-col lg:justify-start lg:w-24 lg:h-[960px] lg:mt-8 lg:mx-0 lg:pt-11">
-      <img className="absolute left-4 md:left-8 w-[25px] h-5 lg:w-auto lg:h-auto" src={logo} alt="logo" />
+      <div className="absolute left-4 w-[25px] h-5 md:left-9">
+        <Image
+          src="/images/logo/logo.svg"
+          width={100}
+          height={100}
+          alt="logo" 
+        />
+      </div>
       <LinksMenu />
       <div className="absolute right-2 space-x-2 md:right-8 flex items-center md:space-x-3 lg:flex-col lg:space-y-6 lg:space-x-0 lg:bottom-9">
-        <img className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 mt-86 rounded-full border-white border-2" src={avatar} alt="avatar" />
+        <div className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
+          <Image 
+            className="mt-86 rounded-full border-white border-2" 
+            src="/images/avatar/image-avatar.png" 
+            width={100}
+            height={100}
+            alt="avatar" 
+          />
+        </div>
         <button
           type="button"
           onClick={handleOnClick}
