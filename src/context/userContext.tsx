@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, User as UserApp, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, User as UserApp, signOut, onIdTokenChanged } from 'firebase/auth';
 import { auth } from '../firebase/firebase-config';
+import nookies from 'nookies';
 
 interface User {
   signUp: (email: string, password: string) => void,
@@ -30,9 +31,20 @@ export const UserContextProvider = ({ children }: {children: ReactNode}) => {
   const signOutApp = () => signOut(auth);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      setLoadingData(false);
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
+      if (!user) {
+        setUser(null);
+        nookies.set(undefined, 'token', '', { path: '/' });
+        setLoadingData(false);
+      } else {
+        const token = await user.getIdToken();
+        setUser(user);
+        nookies.set(undefined, 'token', token, { 
+          path: '/',
+          maxAge: 30 * 24 * 60 * 60 
+        });
+        setLoadingData(false);
+      }
     });
 
     return unsubscribe;

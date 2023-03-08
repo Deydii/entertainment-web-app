@@ -1,4 +1,7 @@
 import { useContext, ReactElement } from 'react';
+import { GetServerSideProps } from 'next';
+import nookies from 'nookies';
+import { firebaseAdmin } from '../firebase/firebaseAdmin';
 import { Transition } from '@headlessui/react';
 import { DataContext } from '../context/dataContext';
 import Layout from '../components/Layout';
@@ -100,6 +103,26 @@ Home.getLayout = function getLayout(page: ReactElement) {
       {page}
     </Layout>
   )
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    let cookies = nookies.get(context);
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid } = token;
+    return {
+      props: {
+        uid
+      },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
 };
 
 export default Home;
