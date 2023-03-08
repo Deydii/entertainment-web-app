@@ -2,7 +2,7 @@ import { useContext, ReactElement } from 'react';
 import { Transition } from '@headlessui/react';
 import { DataContext } from '../context/dataContext';
 import Layout from '../components/Layout';
-import type { NextPageWithLayout } from './_app'
+import type { NextPageWithLayout } from './_app';
 import TrendingCard from "./Trending";
 import Card from '../components/Card';
 import { Results } from '../interface/results';
