@@ -28,7 +28,10 @@ export const UserContextProvider = ({ children }: {children: ReactNode}) => {
 
   const signIn = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
 
-  const signOutApp = () => signOut(auth);
+  const signOutApp = () =>{ 
+    signOut(auth);
+    nookies.destroy(undefined, 'token');
+  };
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
