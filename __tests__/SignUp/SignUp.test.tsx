@@ -1,37 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
-import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { UserContextProvider } from '../../context/userContext';
-import SignUp from "../../routes/signup";
-import Home from "../../routes/Home/home";
-import Root from "../../routes/root";
-import Login from "../../routes/login";
+import SignUp from "../../pages/signup";
+
+jest.mock('next/router', () => ({
+  userRouter: jest.fn()
+}));
 
 describe('Sign up component', () => {
 
-  const routes = [
-    {
-      element: <Root />,
-      children: [
-      {
-        path: "/",
-        element: <Home />
-      },
-      ]
-    },
-    {
-      path: "login",
-      element: <Login />
-    },
-    {
-      path: "signup",
-      element: <SignUp />
-    }
-  ]
-
   const component = 
     <UserContextProvider>
-      <RouterProvider router={createMemoryRouter(routes, { initialEntries: ['/signup']})}/>
+      <SignUp />
     </UserContextProvider>
 
 

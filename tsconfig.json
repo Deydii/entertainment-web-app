@@ -23,7 +23,7 @@
   },
   "include": [
     "src"
-, "src/components", "src/context", "src/firebase", "src/interface", "src/pages", "src/tests"  ],
+, "src/components", "src/context", "src/firebase", "src/interface", "src/pages", "__tests__"  ],
   "exclude": [
     "node_modules"
   ]
