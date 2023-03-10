@@ -24,7 +24,7 @@ $ git clone https://github.com/Deydii/entertainment-web-app.git
 $ yarn
 
 # Run the app
-$ yarn start
+$ yarn dev
 ```
 
 ## Overview
