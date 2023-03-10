@@ -47,7 +47,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: 
+- Live Site URL: https://deydi-entertainment-web-app.vercel.app/
 
 ## My process
 
