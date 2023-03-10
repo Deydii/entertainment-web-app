@@ -47,19 +47,15 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: https://deydi-entertainment-web-app.netlify.app/
+- Live Site URL: 
 
 ## My process
 
 ### Built with
 
 - React
+- Next.js
 - TypeScript
-- React Router Dom
 - Firebase Authentication
 - Tailwind CSS
-
-### Tests
-
-- Jest
-- React Testing Library
+- Framer motion
