@@ -10,7 +10,7 @@ interface ActiveLinksProps {
 const ActiveLink = forwardRef<HTMLAnchorElement, ActiveLinksProps>(({ children, href }, ref) => {
 
   const router = useRouter();
-
+  
   const style = {
     fill: router.pathname === href ? "fill-white" : "fill-[#5A698F]",
   };
