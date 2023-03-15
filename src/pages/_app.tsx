@@ -6,7 +6,7 @@ import { ReactElement, ReactNode } from 'react';
 import { DataContextProvider } from '../context/dataContext';
 import { UserContextProvider } from '../context/userContext';
 import '../styles/globals.css';
-// import 'react-tooltip/dist/react-tooltip.css';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const outfit = Outfit({
   weight: ["300", "500"],
