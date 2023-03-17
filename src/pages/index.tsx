@@ -22,11 +22,22 @@ import { Results } from '../interface/results';
 // }
 
 const Home: NextPageWithLayout = () => {
-
+  
   const { shows, show } = useContext(DataContext);
 
- // const results:Results[] = data.filter(shows => shows.title.toLowerCase().includes(show.toLowerCase()));
-  return (
+  const [searchedShows, setSearchedShows] = useState<Results[]>([]);
+
+  const results:Results[] = shows.filter(shows => shows?.title?.toLowerCase().includes(show.toLowerCase()) || shows?.name?.toLowerCase().includes(show.toLowerCase()));
+
+  const removeDuplicateResults = () => {
+    const ids = results.map(show => show.id);
+    const filteredShows = results.filter(({id}, index) => !ids.includes(id, index + 1));
+    setSearchedShows(filteredShows);
+  }
+
+  useEffect(() => removeDuplicateResults(), [show]);
+
+ return (
     <div className="mt-4 text-white">
       {!show && shows && (
         <>
@@ -88,21 +99,23 @@ const Home: NextPageWithLayout = () => {
       }
       {show && (
         <>
-          {/* <h3 className="text-[20px] md:text-2xl">{`Found ${results.length} results for ${show}`}</h3> */}
+          <h3 className="text-[20px] md:text-2xl">{`Found ${searchedShows.length} results for ${show}`}</h3>
           <div className="mt-6 mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-1 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 min-[375px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-            {/* {results.map(({ title, thumbnail, year, category, rating, isBookmarked }) => {
+            {searchedShows.map(({ id, name, title, first_air_date, release_date, backdrop_path, media, isBookmarked }) => {
               return (
                 <Card 
-                  key={title}
+                  key={id}
+                  id={id}
+                  name={name}
                   title={title}
-                  thumbnail={thumbnail.regular}
-                  year={year}
-                  category={category}
-                  rating={rating}
+                  first_air_date={first_air_date}
+                  release_date={release_date}
+                  backdrop_path={backdrop_path}
+                  media={media}
                   isBookmarked={isBookmarked}
                 />
               )
-            })} */}
+            })}
           </div>
         </>
       )} 

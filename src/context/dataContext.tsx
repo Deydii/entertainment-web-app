@@ -7,7 +7,7 @@ interface ResultsContext {
   // trendingShows: Results[],
   // popularShows: Results[],
   shows: Results[],
- // getShows: (value: string) => void,
+  searchShows: (value: string) => void,
   show: string,
   handleBookmarkedShows: (value: number) => void
 }
@@ -26,7 +26,7 @@ const defaultState = {
   shows: [],
   // trendingShows: [],
   // popularShows: [],
-  //getShows: () => {},
+  searchShows: () => {},
   show: "",
   handleBookmarkedShows: () => {},
 };
@@ -92,9 +92,9 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
     // }
   }, [])
 
-  // const getShows = (value: string):void => {
-  //   setShow(value);
-  // };
+  const searchShows = (value: string):void => {
+    setShow(value);
+  };
 
    const handleBookmarkedShows = (value: number):void => {
     const bookmarked = shows.map(show => {
@@ -114,7 +114,7 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   return (
     <DataContext.Provider value={{ 
       shows,
-      //getShows,
+      searchShows,
       show,
       handleBookmarkedShows
     }}>
