@@ -27,6 +27,8 @@ const Bookmarked: NextPageWithLayout = () => {
 
   const series:Results[] = bookmarked.filter(serie => serie.media_type === "tv" || serie.media === "tv"  );
 
+  const bookmarkedShows: Results[] = bookmarked.filter(bookmarkedShow =>  bookmarkedShow.title?.toLowerCase().includes(show.toLowerCase()) || bookmarkedShow.name?.toLowerCase().includes(show.toLowerCase()));
+
   useEffect(() => removeDuplicateShow(), [shows]);
 
   return (
@@ -87,21 +89,24 @@ const Bookmarked: NextPageWithLayout = () => {
    )}
    {show && (
     <>
-      {/* <h3 className="mt-4 text-[20px] text-white md:text-2xl">{`Found ${bookmarkedShows.length} results for ${show}`}</h3> */}
+      <h3 className="mt-4 text-[20px] text-white md:text-2xl">{`Found ${bookmarkedShows.length} results for ${show}`}</h3>
       <div className="mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-1 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 min-[375px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-        {/* {bookmarkedShows.map(({ title, thumbnail, year, category, rating, isBookmarked }) => {
+        {bookmarkedShows.map(({ id, name, title, first_air_date, release_date, backdrop_path, media_type, media, isBookmarked }) => {
           return (
             <Card 
-              key={title}
+              key={id}
+              id={id}
+              name={name}
               title={title}
-              thumbnail={thumbnail.regular}
-              year={year}
-              category={category}
-              rating={rating}
+              first_air_date={first_air_date}
+              release_date={release_date}
+              backdrop_path={backdrop_path}
+              media_type={media_type}
+              media={media}
               isBookmarked={isBookmarked}
-            />
+          />
           )
-        })} */}
+        })}
       </div>
     </>
    )}
