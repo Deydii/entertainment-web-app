@@ -14,9 +14,9 @@ interface ResultsContext {
 
 const trendingUrl = `${baseUrl}trending/all/week?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
 
-const moviesUrl = `${baseUrl}movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US`;
+const moviesUrl = `${baseUrl}movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&region=FR`;
 
-const seriesUrl = `${baseUrl}tv/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US`;
+const seriesUrl = `${baseUrl}tv/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&region=FR`;
 
 preload(trendingUrl, fetcher);
 preload(moviesUrl, fetcher);
