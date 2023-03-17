@@ -39,16 +39,18 @@ const Home: NextPageWithLayout = () => {
             <div className="mt-8 pr-8 flex overflow-x-scroll overflow-y-hidden space-x-4 md:space-x-8 transition duration-700 ease-in">
               {shows
                 .filter((results: Results) => !results.known_for_department && results.isTrending)
-                .map(({ id, name, title, first_air_date, release_date, media_type, backdrop_path }) => {
+                .map(({ id, name, title, first_air_date, release_date, media_type, backdrop_path, isBookmarked }) => {
                 return (
                   <TrendingCard 
                     key={id}
+                    id={id}
                     name={name}
                     title={title}
                     first_air_date={first_air_date}
                     release_date={release_date}
                     category={media_type}
                     backdrop_path={backdrop_path}
+                    isBookmarked={isBookmarked}
                   />
                   )
                 })

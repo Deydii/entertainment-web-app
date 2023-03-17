@@ -47,16 +47,16 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   const { data: series, error: seriesError, isLoading: seriesLoading } = useSWR(seriesUrl, fetcher);
   
   const getTrendingShows = () => {
-    const trendingData = trending?.results.map((data: Results) => Object.assign(data, {isTrending: true, isBookmarked: false}));
+    const trendingData = trending?.results.map((data: Results) => Object.assign(data, { isTrending: true, isBookmarked: false }));
     setTrendingShows(trendingData);
   }
 
   const getPopularShows = () => {
 
-    const moviesData = movies?.results.map((movie: Results) => Object.assign(movie, {isTrending: false, isBookmarked: false}));
+    const moviesData = movies?.results.map((movie: Results) => Object.assign(movie, { isTrending: false, isBookmarked: false }));
 
     const seriesData = series?.results
-      .map((serie: Results) => Object.assign(serie, {media: "tv", isTrending: false, isBookmarked: false}))
+      .map((serie: Results) => Object.assign(serie, { media: "tv", isTrending: false, isBookmarked: false }))
       .filter((results: Results) => results.backdrop_path !== null);
 
     if (movies?.results && seriesData) {
@@ -107,7 +107,7 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       }
       return show
     })
-    setShows(bookmarked);
+    setShows(bookmarked);    
     //localStorage.setItem('shows', JSON.stringify(bookmarked));
    };
 

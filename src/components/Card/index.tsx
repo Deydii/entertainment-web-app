@@ -9,6 +9,7 @@ interface DataCard {
   release_date: string,
   title?: string,
   backdrop_path: string,
+  media_type?: string,
   media?: string,
   id: number,
   isBookmarked: boolean
@@ -20,6 +21,7 @@ const Card = ({
   release_date,
   title,
   backdrop_path,
+  media_type,
   media,
   id,
   isBookmarked
@@ -92,12 +94,12 @@ const Card = ({
           <li className="flex items-center before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
             <Image 
               className="mr-2"
-              src={media === "tv" ? '/images/icons/icon-category-tv.svg' : '/images/icons/icon-category-movie.svg'} 
+              src={media || media_type === "tv" ? '/images/icons/icon-category-tv.svg' : '/images/icons/icon-category-movie.svg'} 
               width={12}
               height={12}
-              alt={media === "tv" ? "Tv category icon" : "Movie category icon"} 
+              alt={media || media_type === "tv" ? "Tv category icon" : "Movie category icon"} 
             />
-            {media === "tv" ? "Tv" : "Movie"} 
+            {media || media_type === "tv" ? "Tv" : "Movie"} 
           </li>
         </ul>
         <p className="mt-1 text-xs md:text-lg lg:text-xl text-white">{name || title}</p>

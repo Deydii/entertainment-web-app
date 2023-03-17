@@ -12,9 +12,9 @@ import { Results } from '../interface/results';
 
 const TvSeries: NextPageWithLayout = () => {
 
-  const { popularShows, show } = useContext(DataContext);
+  const { shows, show } = useContext(DataContext);
 
-  const results:Results[] = popularShows.filter(results => results.media === "tv");
+  const results:Results[] = shows.filter(results => results.media === "tv");
 
   //const shows:Results[] = data.filter(shows => shows.title.toLowerCase().includes(show.toLowerCase()) && shows.category.toLowerCase() === "tv series");
 
@@ -29,7 +29,7 @@ const TvSeries: NextPageWithLayout = () => {
       transition={{ ease: "easeOut", duration: 2 }}
     >
       <div className="mt-6 mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-1 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 min-[375px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-        {results.map(({ id, name, title, first_air_date, release_date, backdrop_path, media }) => {
+        {results.map(({ id, name, title, first_air_date, release_date, backdrop_path, media, isBookmarked }) => {
           return (
             <Card
               key={id}
@@ -40,6 +40,7 @@ const TvSeries: NextPageWithLayout = () => {
               release_date={release_date}
               backdrop_path={backdrop_path}
               media={media}
+              isBookmarked={isBookmarked}
             />
           )
         })} 
