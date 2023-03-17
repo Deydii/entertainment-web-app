@@ -59,7 +59,7 @@ const Home: NextPageWithLayout = () => {
                     title={title}
                     first_air_date={first_air_date}
                     release_date={release_date}
-                    category={media_type}
+                    media_type={media_type}
                     backdrop_path={backdrop_path}
                     isBookmarked={isBookmarked}
                   />

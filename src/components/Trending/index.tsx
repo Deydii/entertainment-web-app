@@ -9,7 +9,7 @@ interface TrendingCardData {
   first_air_date: string,
   release_date: string,
   title?: string,
-  category: string,
+  media_type: string,
   backdrop_path: string,
   isBookmarked: boolean
 }
@@ -20,7 +20,7 @@ const TrendingCard = ({
   first_air_date,
   release_date,
   title,
-  category,
+  media_type,
   backdrop_path,
   isBookmarked
 } : TrendingCardData ) => {
@@ -85,12 +85,12 @@ const TrendingCard = ({
             <li className="flex items-center capitalize before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
               <Image 
                 className="mr-2"
-                src={category === "movie" ? "/images/icons/icon-category-movie.svg" : "/images/icons/icon-category-tv.svg"} 
+                src={media_type === "movie" ? "/images/icons/icon-category-movie.svg" : "/images/icons/icon-category-tv.svg"} 
                 width={12} 
                 height={12}
-                alt={`${category} category icon`} 
+                alt={`${media_type} category icon`} 
               />
-              {category}
+              {media_type === "tv" ? "TV Series" : "Movie"}
             </li>
           </ul>
           <p className="mt-0 md:mt-1 text-sm md:text-xl text-white">{name || title}</p>

@@ -99,7 +99,7 @@ const Card = ({
               height={12}
               alt={media || media_type === "tv" ? "Tv category icon" : "Movie category icon"} 
             />
-            {media || media_type === "tv" ? "Tv" : "Movie"} 
+            {media || media_type === "tv" ? "TV Series" : "Movie"} 
           </li>
         </ul>
         <p className="mt-1 text-xs md:text-lg lg:text-xl text-white">{name || title}</p>

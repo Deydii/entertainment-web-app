@@ -65,6 +65,29 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
     }
   };
 
+  // useEffect(() => {
+  //   const showsLocalStorage:string = localStorage.getItem('shows') || "[]";
+  //   const dataShows: Results[] = JSON.parse(showsLocalStorage);
+
+  //   if (dataShows) {
+  //     setShows({
+  //       ...shows,
+  //       dataShows
+  //     })
+  //   }
+
+    // if (trendingShows && popularShows) {
+    //  const showsData = [...trendingShows, ...popularShows];
+ 
+    //  if (!showsLocalStorage) {
+    // //  if (shows === "[]") {
+    // //    setShows(showsData);
+    //  } else {
+    //    setShows(dataShows);
+    //  }
+    // };
+  //  }, []);
+ 
   useEffect(() => {
     getTrendingShows();
   }, [trending])
@@ -79,18 +102,6 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       setShows(showsData);
     }
   }, [trendingShows, popularShows])
-
-  useEffect(() => {
-   const shows:string = localStorage.getItem('shows') || "[]";
-   //const dataShows: Results[] = JSON.parse(shows);
-
-    // if (shows === "[]") {
-    //   //console.log(data);
-    //   //setData(dataApp)
-    // } else {
-    //  // setData(dataShows);
-    // }
-  }, [])
 
   const searchShows = (value: string):void => {
     setShow(value);
@@ -107,8 +118,8 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       }
       return show
     })
-    setShows(bookmarked);    
-    //localStorage.setItem('shows', JSON.stringify(bookmarked));
+    setShows(bookmarked);
+    //localStorage.setItem('shows', JSON.stringify(bookmarked));    
    };
 
   return (
