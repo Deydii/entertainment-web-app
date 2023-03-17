@@ -2,10 +2,10 @@ import Image from 'next/image';
 // import playIcon from '../../../images/icons/icon-play.svg';
 
 interface TrendingCardData {
-  name: string, 
+  name?: string, 
   first_air_date: string,
   release_date: string,
-  title: string,
+  title?: string,
   category: string,
   backdrop_path: string
 }

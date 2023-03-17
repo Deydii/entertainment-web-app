@@ -1,4 +1,4 @@
-export interface TrendingResults {
+export interface Results {
   adult: boolean,
   backdrop_path: string,
   id: number,
