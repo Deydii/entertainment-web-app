@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { DataContext } from '../context/dataContext';
 import Layout from '../components/Layout';
 import type { NextPageWithLayout } from './_app';
-import TrendingCard from "./Trending";
+import TrendingCard from "../components/Trending";
 import Card from '../components/Card';
 import { Results } from '../interface/results';
 

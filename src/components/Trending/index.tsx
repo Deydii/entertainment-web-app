@@ -24,22 +24,26 @@ const TrendingCard = ({
   return (
     <>
       <div data-testid="trending" className="group relative flex-shrink-0 snap-start hover:cursor-pointer hover:scale-[1.05] transition duration-300 ease-in-out">
-        <div className="hidden md:block md:w-[470px] md:h-[230px]">
+        <div className="hidden md:block">
           <Image
             className="rounded-lg opacity-80"
-            src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+            priority={true}
+            src={`https://image.tmdb.org/t/p/w780${backdrop_path}`}
             width={470}
             height={230}
             alt={`${name} image` || `${title} image`}
+            style={{ width: "auto", height:"auto"}}
           />
         </div>
-        <div className="block w-[240px] h-[140px] md:hidden">
+        <div className="block md:hidden">
           <Image
-            className=""
-            src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+            className="rounded-lg opacity-80"
+            priority={true}
+            src={`https://image.tmdb.org/t/p/w780${backdrop_path}`}
             width={240}
             height={140}
             alt={`${name} image` || `${title} image`}
+            style={{ width: "auto", height:"auto"}}
           />
        </div>
         <div className="flex justify-center items-center absolute z-2 top-3 right-4 rounded-full w-7 h-7 bg-blue-200">
