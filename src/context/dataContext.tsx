@@ -49,7 +49,7 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   const getTrendingShows = () => {
     const trendingData = trending?.results.map((data: Results) => Object.assign(data, { isTrending: true, isBookmarked: false }));
     setTrendingShows(trendingData);
-  }
+  };
 
   const getPopularShows = () => {
 
@@ -64,29 +64,6 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       setPopularShows(showsArray);
     }
   };
-
-  // useEffect(() => {
-  //   const showsLocalStorage:string = localStorage.getItem('shows') || "[]";
-  //   const dataShows: Results[] = JSON.parse(showsLocalStorage);
-
-  //   if (dataShows) {
-  //     setShows({
-  //       ...shows,
-  //       dataShows
-  //     })
-  //   }
-
-    // if (trendingShows && popularShows) {
-    //  const showsData = [...trendingShows, ...popularShows];
- 
-    //  if (!showsLocalStorage) {
-    // //  if (shows === "[]") {
-    // //    setShows(showsData);
-    //  } else {
-    //    setShows(dataShows);
-    //  }
-    // };
-  //  }, []);
  
   useEffect(() => {
     getTrendingShows();
@@ -97,10 +74,8 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   }, [movies, series]);
 
   useEffect(() => {
-    if (trendingShows && popularShows) {
       const showsData = [...trendingShows, ...popularShows];
       setShows(showsData);
-    }
   }, [trendingShows, popularShows])
 
   const searchShows = (value: string):void => {
@@ -118,8 +93,8 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       }
       return show
     })
+
     setShows(bookmarked);
-    //localStorage.setItem('shows', JSON.stringify(bookmarked));    
    };
 
   return (
