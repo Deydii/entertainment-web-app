@@ -38,7 +38,7 @@ const Home: NextPageWithLayout = () => {
           >
             <div className="mt-8 pr-8 flex overflow-x-scroll overflow-y-hidden space-x-4 md:space-x-8 transition duration-700 ease-in">
               {trendingShows
-                .filter((results: Results) => results.media_type === "movie" && "tv")
+                .filter((results: Results) => !results.known_for_department)
                 .map(({ id, name, title, first_air_date, release_date, media_type, backdrop_path }) => {
                 return (
                   <TrendingCard 
@@ -62,7 +62,7 @@ const Home: NextPageWithLayout = () => {
             transition={{ ease: "easeOut", duration: 2 }}
           >
             <div className="mt-6 mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-2 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-              {popularShows.map(({ id, name, title, first_air_date, release_date, backdrop_path, adult }) => {
+              {popularShows.map(({ id, name, title, first_air_date, release_date, backdrop_path, media }) => {
                 return (
                   <Card 
                     key={id}
@@ -72,7 +72,7 @@ const Home: NextPageWithLayout = () => {
                     first_air_date={first_air_date}
                     release_date={release_date}
                     backdrop_path={backdrop_path}
-                    adult={adult}
+                    media={media}
                   />
                 )
               })}

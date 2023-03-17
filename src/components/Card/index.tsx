@@ -9,7 +9,7 @@ interface DataCard {
   release_date: string,
   title?: string,
   backdrop_path: string,
-  adult: boolean,
+  media?: string,
   id: number
 }
 
@@ -19,7 +19,7 @@ const Card = ({
   release_date,
   title,
   backdrop_path,
-  adult,
+  media,
   id
 }: DataCard ) => {
 
@@ -90,12 +90,12 @@ const Card = ({
           <li className="flex items-center before:inline-block before:w-[3px] before:h-[3px] before:mr-2 before:bg-white/50 before:rounded-full">
             <Image 
               className="mr-2"
-              src={adult === true || adult === false ? '/images/icons/icon-category-movie.svg' : '/images/icons/icon-category-tv.svg'} 
+              src={media === "tv" ? '/images/icons/icon-category-tv.svg' : '/images/icons/icon-category-movie.svg'} 
               width={12}
               height={12}
-              alt={adult === true || adult === false ? "Movie category icon" : "Tv category icon"} 
+              alt={media === "tv" ? "Tv category icon" : "Movie category icon"} 
             />
-            {adult === true || adult === false ? "Movie" : "Tv"} 
+            {media === "tv" ? "Tv" : "Movie"} 
           </li>
         </ul>
         <p className="mt-1 text-xs md:text-lg lg:text-xl text-white">{name || title}</p>

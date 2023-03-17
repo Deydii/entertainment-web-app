@@ -45,8 +45,10 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   
 
   const getPopularShows = () => {
-    const seriesData = series?.results.filter((results: Results) => results.backdrop_path !== null);
-    
+    const seriesData = series?.results
+      .map((series: Results) => Object.assign(series, {media: "tv"}))
+      .filter((results: Results) => results.backdrop_path !== null);
+
     if (movies?.results && seriesData) {
       const showsArray: Results[] = [...movies.results, ...seriesData];
       setPopularShows(showsArray);

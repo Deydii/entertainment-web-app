@@ -18,5 +18,7 @@ export interface Results {
   vote_average: number,
   vote_count: number,
   origin_country?: string[]
+  media?: string
+  known_for_department?: string
 }
 
