@@ -4,8 +4,9 @@ import { fetcher, baseUrl } from '../api';
 import { Results } from '../interface/results';
 
 interface ResultsContext {
-  trendingShows: Results[],
-  popularShows: Results[],
+  // trendingShows: Results[],
+  // popularShows: Results[],
+  shows: Results[],
  // getShows: (value: string) => void,
   show: string,
   handleBookmarkedShows: (value: number) => void
@@ -22,8 +23,9 @@ preload(moviesUrl, fetcher);
 preload(seriesUrl, fetcher);
 
 const defaultState = {
-  trendingShows: [],
-  popularShows: [],
+  shows: [],
+  // trendingShows: [],
+  // popularShows: [],
   //getShows: () => {},
   show: "",
   handleBookmarkedShows: () => {},
@@ -33,6 +35,7 @@ export const DataContext = createContext<ResultsContext>(defaultState);
 
 export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   
+  const [shows, setShows] = useState<Results[]>([]);
   const [trendingShows, setTrendingShows] = useState<Results[]>([]);
   const [popularShows, setPopularShows] = useState<Results[]>([]);
   const [show, setShow] = useState("");
@@ -43,25 +46,39 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
 
   const { data: series, error: seriesError, isLoading: seriesLoading } = useSWR(seriesUrl, fetcher);
   
+  const getTrendingShows = () => {
+    const trendingData = trending?.results.map((data: Results) => Object.assign(data, {isTrending: true, isBookmarked: false}));
+    setTrendingShows(trendingData);
+  }
 
   const getPopularShows = () => {
+
+    const moviesData = movies?.results.map((movie: Results) => Object.assign(movie, {isTrending: false, isBookmarked: false}));
+
     const seriesData = series?.results
-      .map((series: Results) => Object.assign(series, {media: "tv"}))
+      .map((serie: Results) => Object.assign(serie, {media: "tv", isTrending: false, isBookmarked: false}))
       .filter((results: Results) => results.backdrop_path !== null);
 
     if (movies?.results && seriesData) {
-      const showsArray: Results[] = [...movies.results, ...seriesData];
+      const showsArray: Results[] = [...moviesData, ...seriesData];
       setPopularShows(showsArray);
     }
   };
 
   useEffect(() => {
-    setTrendingShows(trending?.results)
+    getTrendingShows();
   }, [trending])
 
   useEffect(() => {
     getPopularShows()
   }, [movies, series]);
+
+  useEffect(() => {
+    if (trendingShows && popularShows) {
+      const showsData = [...trendingShows, ...popularShows];
+      setShows(showsData);
+    }
+  }, [trendingShows, popularShows])
 
   useEffect(() => {
    const shows:string = localStorage.getItem('shows') || "[]";
@@ -79,27 +96,24 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   //   setShow(value);
   // };
 
-  const handleBookmarkedShows = (value: number):void => {
-    
-    // const bookmarked = data.map(shows => {
-    //   if (shows.title === value) {
-    //     const bookmarkedValue = {
-    //       ...shows,
-    //       isBookmarked: !shows.isBookmarked
-    //     }
-    //     return bookmarkedValue
-    //   }
-    //   return shows
-    // })
-    //setData(bookmarked);
-    
+   const handleBookmarkedShows = (value: number):void => {
+    const bookmarked = shows.map(show => {
+      if (show.id === value) {
+        const bookmarkedValue = {
+          ...show,
+          isBookmarked: !show.isBookmarked
+        }
+       return bookmarkedValue
+      }
+      return show
+    })
+    setShows(bookmarked);
     //localStorage.setItem('shows', JSON.stringify(bookmarked));
-  };
+   };
 
   return (
     <DataContext.Provider value={{ 
-      trendingShows,
-      popularShows,
+      shows,
       //getShows,
       show,
       handleBookmarkedShows

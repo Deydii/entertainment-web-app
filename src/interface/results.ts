@@ -19,6 +19,8 @@ export interface Results {
   vote_count: number,
   origin_country?: string[]
   media?: string
-  known_for_department?: string
+  known_for_department?: string,
+  isTrending: boolean,
+  isBookmarked: boolean
 }
 
