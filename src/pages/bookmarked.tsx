@@ -1,4 +1,4 @@
-import { useContext, ReactElement } from 'react';
+import { useContext, ReactElement, useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import nookies from 'nookies';
 import { firebaseAdmin } from '../firebase/firebaseAdmin';
@@ -11,15 +11,25 @@ import { Results } from '../interface/results';
 
 const Bookmarked: NextPageWithLayout = () => {
 
-  const { data, show } = useContext(DataContext);
+  const { shows, show } = useContext(DataContext);
 
-  const results:Results[] = data.filter(results => results.isBookmarked);
+  const [bookmarked, setBookmarked] = useState<Results[]>([]);
+
+  const results:Results[] = shows.filter(results => results.isBookmarked); 
+
+  const removeDuplicateShow = () => {
+    const ids = results.map(show => show.id);
+    const filteredShows = results.filter(({id}, index) => !ids.includes(id, index + 1));
+    setBookmarked(filteredShows);
+  }
   
-  const movies:Results[] = results.filter(movie => movie.category.toLowerCase() === "movie");
+  const movies:Results[] = bookmarked.filter(movie =>  movie.media_type !== "tv" && !movie.media);
 
-  const series:Results[] = results.filter(serie => serie.category.toLowerCase() === "tv series");
+  const series:Results[] = bookmarked.filter(serie => serie.media_type === "tv" || serie.media === "tv"  );
 
-  const bookmarkedShows: Results[] = results.filter(bookmarked => bookmarked.isBookmarked && bookmarked.title.toLowerCase().includes(show.toLowerCase()));
+  const bookmarkedShows: Results[] = bookmarked.filter(bookmarkedShow =>  bookmarkedShow.title?.toLowerCase().includes(show.toLowerCase()) || bookmarkedShow.name?.toLowerCase().includes(show.toLowerCase()));
+
+  useEffect(() => removeDuplicateShow(), [shows]);
 
   return (
    <>
@@ -32,15 +42,18 @@ const Bookmarked: NextPageWithLayout = () => {
       transition={{ ease: "easeOut", duration: 2 }}
     >
       <div className="mt-6 mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-1 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 min-[375px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-        {movies.map(({ title, thumbnail, year, category, rating, isBookmarked }) => {
+        {movies.map(({ id, name, title, first_air_date, release_date, backdrop_path, media_type, media, isBookmarked }) => {
           return (
             <Card
-              key={title}
+              key={id}
+              id={id}
+              name={name}
               title={title}
-              thumbnail={thumbnail.regular}
-              year={year}
-              category={category}
-              rating={rating}
+              first_air_date={first_air_date}
+              release_date={release_date}
+              backdrop_path={backdrop_path}
+              media_type={media_type}
+              media={media}
               isBookmarked={isBookmarked}
             />
           )
@@ -54,15 +67,18 @@ const Bookmarked: NextPageWithLayout = () => {
       transition={{ ease: "easeOut", duration: 2 }}
     >
       <div className="mt-6 mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-1 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 min-[375px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-        {series.map(({ title, thumbnail, year, category, rating, isBookmarked }) => {
+        {series.map(({ id, name, title, first_air_date, release_date, backdrop_path, media_type, media, isBookmarked }) => {
           return (
             <Card
-              key={title}
+              key={id}
+              id={id}
+              name={name}
               title={title}
-              thumbnail={thumbnail.regular}
-              year={year}
-              category={category}
-              rating={rating}
+              first_air_date={first_air_date}
+              release_date={release_date}
+              backdrop_path={backdrop_path}
+              media_type={media_type}
+              media={media}
               isBookmarked={isBookmarked}
             />
           )
@@ -75,17 +91,20 @@ const Bookmarked: NextPageWithLayout = () => {
     <>
       <h3 className="mt-4 text-[20px] text-white md:text-2xl">{`Found ${bookmarkedShows.length} results for ${show}`}</h3>
       <div className="mr-4 md:mr-6 lg:mr-8 lg:mt-8 grid grid-cols-1 gap-x-4 md:gap-x-7 lg:gap-x-10 gap-y-8 min-[375px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 min-[1700px]:grid-cols-5">
-        {bookmarkedShows.map(({ title, thumbnail, year, category, rating, isBookmarked }) => {
+        {bookmarkedShows.map(({ id, name, title, first_air_date, release_date, backdrop_path, media_type, media, isBookmarked }) => {
           return (
             <Card 
-              key={title}
+              key={id}
+              id={id}
+              name={name}
               title={title}
-              thumbnail={thumbnail.regular}
-              year={year}
-              category={category}
-              rating={rating}
+              first_air_date={first_air_date}
+              release_date={release_date}
+              backdrop_path={backdrop_path}
+              media_type={media_type}
+              media={media}
               isBookmarked={isBookmarked}
-            />
+          />
           )
         })}
       </div>

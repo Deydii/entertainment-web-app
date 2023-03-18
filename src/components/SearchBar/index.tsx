@@ -4,13 +4,13 @@ import Image from 'next/image';
 
 const SearchBar = () => {
 
-  const { getShows } = useContext(DataContext);
+  const { searchShows } = useContext(DataContext);
 
   const [inputValue, setInputValue] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setInputValue(e.target.value);
-    getShows(e.target.value);
+    searchShows(e.target.value);
   };
 
   return(
