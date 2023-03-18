@@ -8,6 +8,7 @@ import Layout from '../components/Layout';
 import type { NextPageWithLayout } from './_app';
 import TrendingCard from "../components/Trending";
 import Card from '../components/Card';
+import Loader from '../components/Loader';
 import { Results } from '../interface/results';
 
 // interface DataCard {
@@ -39,7 +40,7 @@ const Home: NextPageWithLayout = () => {
 
  return (
     <div className="mt-4 text-white">
-      {isLoadingShows && <p>Loading...</p>}
+      {isLoadingShows && <Loader />}
       {!show && !isLoadingShows && shows && (
         <>
           <h3 className="text-[20px] md:text-2xl">Trending</h3>

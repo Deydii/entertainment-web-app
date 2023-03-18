@@ -84,6 +84,7 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
    setIsLoadingShows(true);
    const showsLocalStorage:string = localStorage.getItem('shows') || "[]";
    const allShows = trendingShows.concat(popularMovies, popularSeries);  
+
     if (!shows.length && showsLocalStorage === "[]") {
       setShows(allShows);
       setIsLoadingShows(false);
