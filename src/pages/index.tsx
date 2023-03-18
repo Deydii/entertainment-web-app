@@ -24,7 +24,7 @@ import { Results } from '../interface/results';
 
 const Home: NextPageWithLayout = () => {
   
-  const { shows, show, isLoadingShows, } = useContext(DataContext);
+  const { shows, show, isLoadingShows, isError } = useContext(DataContext);
 
   const [searchedShows, setSearchedShows] = useState<Results[]>([]);
 
@@ -37,11 +37,13 @@ const Home: NextPageWithLayout = () => {
   }
 
   useEffect(() => removeDuplicateResults(), [show]);
-
+  
  return (
     <div className="mt-4 text-white">
-      {isLoadingShows && <Loader />}
-      {!show && !isLoadingShows && shows && (
+      <>
+      {isError && <p>The request unfortunately failed. Please try later</p>} 
+      {!isError && isLoadingShows && <Loader />}
+      {!isError && !show && !isLoadingShows && shows && (
         <>
           <h3 className="text-[20px] md:text-2xl">Trending</h3>
           <motion.div
@@ -120,7 +122,8 @@ const Home: NextPageWithLayout = () => {
             })}
           </div>
         </>
-      )} 
+      )}
+      </>
     </div>
   )
 };

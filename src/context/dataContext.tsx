@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import useSWR, { preload } from 'swr';
+import useSWR, { preload, SWRConfig } from 'swr';
 import { fetcher, baseUrl } from '../api';
 import { Results } from '../interface/results';
 
@@ -8,7 +8,8 @@ interface ResultsContext {
   isLoadingShows: boolean,
   searchShows: (value: string) => void,
   show: string,
-  handleBookmarkedShows: (value: number) => void
+  handleBookmarkedShows: (value: number) => void,
+  isError: boolean
 }
 
 const trendingUrl = `${baseUrl}trending/all/week?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
@@ -27,6 +28,7 @@ const defaultState = {
   searchShows: () => {},
   show: "",
   handleBookmarkedShows: () => {},
+  isError: false
 };
 
 export const DataContext = createContext<ResultsContext>(defaultState);
@@ -39,7 +41,7 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   const [popularSeries, setPopularSeries] = useState<Results[]>([]);
   const [isLoadingShows, setIsLoadingShows] = useState(false);
   const [show, setShow] = useState("");
-
+  const [isError, setIsError] = useState(false);
 
   const { data: trending, error, isLoading } = useSWR(trendingUrl, fetcher);
 
@@ -47,6 +49,16 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
 
   const { data: series, error: seriesError, isLoading: seriesLoading } = useSWR(seriesUrl, fetcher);
   
+  const handleErrors = () => {
+    if (error || moviesError || seriesError) {
+      setIsError(true)
+    } else {
+      setIsError(false)
+    }
+  }
+
+  useEffect(() => handleErrors(), []);
+
   const getTrendingShows = async () => {
     const trendingData = await trending?.results.map((data: Results) => Object.assign(data, { isTrending: true, isBookmarked: false }));
     setTrendingShows(trendingData);
@@ -144,7 +156,8 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
       isLoadingShows,
       searchShows,
       show,
-      handleBookmarkedShows
+      handleBookmarkedShows,
+      isError
     }}>
       {children}
     </DataContext.Provider>
