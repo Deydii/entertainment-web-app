@@ -57,5 +57,7 @@ Users should be able to:
 - Next.js
 - TypeScript
 - Firebase Authentication
+- The Movie Database API
+- SWR
 - Tailwind CSS
 - Framer motion
