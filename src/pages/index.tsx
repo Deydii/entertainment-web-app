@@ -23,7 +23,7 @@ import { Results } from '../interface/results';
 
 const Home: NextPageWithLayout = () => {
   
-  const { shows, show } = useContext(DataContext);
+  const { shows, show, isLoadingShows, } = useContext(DataContext);
 
   const [searchedShows, setSearchedShows] = useState<Results[]>([]);
 
@@ -39,7 +39,8 @@ const Home: NextPageWithLayout = () => {
 
  return (
     <div className="mt-4 text-white">
-      {!show && shows && (
+      {isLoadingShows && <p>Loading...</p>}
+      {!show && !isLoadingShows && shows && (
         <>
           <h3 className="text-[20px] md:text-2xl">Trending</h3>
           <motion.div
