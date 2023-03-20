@@ -42,28 +42,30 @@ const Card = ({
          <div className="hidden lg:block lg:relative lg:w-auto lg:h-48">
           <Image
             className="rounded-lg"
+            priority={true}
             src={`https://image.tmdb.org/t/p/w780${backdrop_path}`}
             fill
-            sizes="(max-width: 768px) 50vw,
-            (max-width: 1200px) 33vw,
-            25vw"
+            sizes="25vw"
             alt={`${name} image` || `${title} image`}
           />
         </div>
         <div className="hidden md:block md:relative md:w-auto md:h-36 lg:hidden">
           <Image
             className="rounded-lg"
+            priority={true}
             src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
             fill
-
+            sizes="33vw"
             alt={`${name} image` || `${title} image`}
           />
         </div>
         <div className="block relative w-auto h-28 md:hidden">
           <Image
             className="rounded-lg"
+            priority={true}
             src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
             fill
+            sizes="50vw"
             alt={`${name} image` || `${title} image`}
           />
         </div>
