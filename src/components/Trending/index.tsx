@@ -6,8 +6,8 @@ import Image from 'next/image';
 interface TrendingCardData {
   id: number,
   name?: string, 
-  first_air_date: string,
-  release_date: string,
+  first_air_date?: string,
+  release_date?: string,
   title?: string,
   media_type: string,
   backdrop_path: string,

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import useSWR, { preload, SWRConfig } from 'swr';
+import useSWR, { preload } from 'swr';
 import { fetcher, baseUrl } from '../api';
 import { Results } from '../interface/results';
 
@@ -60,20 +60,21 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
   useEffect(() => handleErrors(), []);
 
   const getTrendingShows = async () => {
-    const trendingData = await trending?.results.map((data: Results) => Object.assign(data, { isTrending: true, isBookmarked: false }));
-    setTrendingShows(trendingData);
+    const trendingData = await trending?.results?.map((data: Results) => Object.assign(data, { isTrending: true, isBookmarked: false }));
+    if (trendingData) {
+      setTrendingShows(trendingData);
+    }
   };
 
   const getPopularMovies = async () => {
-    const moviesData = await movies?.results.map((movie: Results) => Object.assign(movie, { isTrending: false, isBookmarked: false }));
-    if (movies?.results) {
+    const moviesData = await movies?.results?.map((movie: Results) => Object.assign(movie, { isTrending: false, isBookmarked: false }));
+    if (moviesData) {
       setPopularMovies(moviesData)
     }
   };
 
   const getPopularSeries = async () => {
-    const seriesData = await series?.results
-      .map((serie: Results) => Object.assign(serie, { media: "tv", isTrending: false, isBookmarked: false }))
+    const seriesData = await series?.results?.map((serie: Results) => Object.assign(serie, { media: "tv", isTrending: false, isBookmarked: false }))
       .filter((results: Results) => results.backdrop_path !== null);
     if (seriesData) {
       setPopularSeries(seriesData)
@@ -97,12 +98,12 @@ export const DataContextProvider = ({ children }: {children: ReactNode}) => {
    const showsLocalStorage:string = localStorage.getItem('shows') || "[]";
    const allShows = trendingShows.concat(popularMovies, popularSeries);  
 
-    if (!shows.length && showsLocalStorage === "[]") {
+    if (!shows && showsLocalStorage === "[]") {
       setShows(allShows);
       setIsLoadingShows(false);
     } else {
       const showsData : Results[] = JSON.parse(showsLocalStorage);
-      const newShowsArray = allShows.map(show => {
+      const newShowsArray = allShows?.map(show => {
         for (let i = 0; i < showsData.length; i++) {
           if (show.id === showsData[i].id) {
             const bookmarkedValue = {
