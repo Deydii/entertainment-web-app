@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 interface DataCard {
   name?: string, 
-  first_air_date: string,
-  release_date: string,
+  first_air_date?: string,
+  release_date?: string,
   title?: string,
   backdrop_path: string,
   media_type?: string,

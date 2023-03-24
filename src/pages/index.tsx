@@ -28,7 +28,7 @@ const Home: NextPageWithLayout = () => {
 
   const [searchedShows, setSearchedShows] = useState<Results[]>([]);
 
-  const results:Results[] = shows.filter(shows => shows?.title?.toLowerCase().includes(show.toLowerCase()) || shows?.name?.toLowerCase().includes(show.toLowerCase()));
+  const results:Results[] = shows?.filter(shows => shows?.title?.toLowerCase().includes(show.toLowerCase()) || shows?.name?.toLowerCase().includes(show.toLowerCase()));
 
   const removeDuplicateResults = () => {
     const ids = results.map(show => show.id);
